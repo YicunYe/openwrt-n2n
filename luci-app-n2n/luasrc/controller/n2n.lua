@@ -6,10 +6,9 @@ function index()
 	if not nixio.fs.access("/etc/config/n2n") then
 		return
 	end
-
-	entry({"admin", "vpn"}, firstchild(), "VPN", 45).dependent = false
-	entry({"admin", "vpn", "n2n"}, cbi("n2n"), _("N2N VPN"), 45).dependent = true
-	entry({"admin", "vpn", "n2n", "status"}, call("act_status")).leaf = true
+	
+	entry({"admin", "service", "n2n"}, cbi("n2n"), _("N2N VPN"), 45).dependent = true
+	entry({"admin", "service", "n2n", "status"}, call("act_status")).leaf = true
 end
 
 function act_status()
